@@ -28,6 +28,7 @@ export default function AuthInput({
         <TextInput
           className="bg-white grow p-4 rounded-xl flex-1"
           placeholder={placeholder}
+          placeholderTextColor="rgba(128,128,128,0.5)"
           value={value}
           onChangeText={onChangeText}
           secureTextEntry={secureTextEntry}

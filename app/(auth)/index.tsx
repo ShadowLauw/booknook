@@ -1,4 +1,5 @@
 import AuthInput from "@/components/AuthInput";
+import { useAuth } from "@/context/AuthContext";
 import { useAuthForm } from "@/hooks/useAuthForm";
 import { loginSchema } from "@/schemas/auth";
 import { useRouter } from "expo-router";
@@ -7,6 +8,7 @@ import { Pressable, Text, TouchableOpacity, View } from "react-native";
 import { AtSymbolIcon, LockClosedIcon } from "react-native-heroicons/outline";
 
 export default function LoginPage() {
+  const { logIn } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
 
   const { form, errors, handleChange, handleSubmit } = useAuthForm(
@@ -17,6 +19,8 @@ export default function LoginPage() {
   const onSubmit = () => {
     if (handleSubmit()) {
       console.log("Login ok", form);
+      logIn();
+      router.replace("/(tabs)");
     }
   };
 
