@@ -5,5 +5,8 @@ module.exports = {
   theme: {
     extend: {},
   },
+  corePlugins: {
+    backgroundOpacity: true,
+  },
   plugins: [],
 };

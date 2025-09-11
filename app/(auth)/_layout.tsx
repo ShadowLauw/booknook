@@ -1,4 +1,5 @@
 import { Stack } from "expo-router";
+import colors from "tailwindcss/colors";
 
 export default function AuthLayout() {
   return (
@@ -6,10 +7,15 @@ export default function AuthLayout() {
       screenOptions={{
         animation: "none",
         headerTitleAlign: "center",
+        headerStyle: {
+          backgroundColor: colors.amber[500],
+        },
+        headerTintColor: colors.white,
+        headerTitle: "",
       }}
     >
-      <Stack.Screen name="index" options={{ title: "Login" }} />
-      <Stack.Screen name="register" options={{ title: "Register" }} />
+      <Stack.Screen name="login" />
+      <Stack.Screen name="register" />
     </Stack>
   );
 }

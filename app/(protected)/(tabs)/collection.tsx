@@ -10,6 +10,11 @@ export default function Collection() {
       }}
     >
       <Text>My Collection</Text>
+
+      <View className="flex gap-4">
+        <View className="size-40 bg-white rounded-xl shadow"></View>
+        <View className="size-40 bg-white rounded-xl drop-shadow"></View>
+      </View>
     </View>
   );
 }

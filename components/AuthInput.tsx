@@ -22,7 +22,7 @@ export default function AuthInput({
   toggleSecure,
 }: AuthInputProps) {
   return (
-    <View className="w-full gap-1">
+    <View className="w-full gap-3">
       <View className="flex-row items-center gap-3 w-full">
         {icon}
         <TextInput

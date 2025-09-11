@@ -20,7 +20,7 @@ export default function LoginPage() {
     if (handleSubmit()) {
       console.log("Login ok", form);
       logIn();
-      router.replace("/(tabs)");
+      router.replace("/");
     }
   };
 
@@ -52,7 +52,7 @@ export default function LoginPage() {
           <Text className="text-white text-center font-bold">Login</Text>
         </TouchableOpacity>
         <Pressable onPress={() => router.replace("/register")}>
-          <Text className="text-amber-500 underline">
+          <Text className="text-amber-800 underline">
             Don't have an account? Register
           </Text>
         </Pressable>
