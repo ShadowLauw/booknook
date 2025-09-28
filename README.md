@@ -25,11 +25,11 @@ BookNook is a mobile application that allows you to easily browse your book coll
 
 ## Technologies
 
-- React Native + Expo
+- React Native + Expo / TypeScript
 - Expo Router for navigation
-- Tailwind / NativeWind for styling
+- Tailwind / Nativewind for styling
 - Zod for form validation
-- Planning: NextJS / Drizzle / PostgreSQL
+- Upcoming: NextJS / Drizzle / PostgreSQL
 
 ---
 
@@ -38,19 +38,19 @@ BookNook is a mobile application that allows you to easily browse your book coll
 ### Authentication
 
 Login / Register page:  
-![Login](assets/screenshots/login.png)
-![Register](assets/screenshots/register.png)
+<img src="assets/screenshots/login.png" alt="Login" width="400" />
+<img src="assets/screenshots/register.png" alt="Register" width="400" />
 
 Login page with validation errors:  
-![Login errors](assets/screenshots/login-errors.png)
+<img src="assets/screenshots/login-errors.png" alt="Login errors" width="400" />
 
 ### Home Page
 
 Home page at first load:  
-![Home initial](assets/screenshots/home-initial.png)
+<img src="assets/screenshots/home-initial.png" alt="Home initial" width="400" />
 
 Scrolling home page (down & sideways):  
-![Home scrolled](assets/screenshots/home-scrolled.png)
+<img src="assets/screenshots/home-scrolled.png" alt="Home scrolled" width="400" />
 
 ---
 
