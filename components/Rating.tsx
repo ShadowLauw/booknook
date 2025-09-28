@@ -15,7 +15,6 @@ export default function Rating({ rating }: RatingProps) {
     <View className="flex-row items-center">
       {[...Array(starFull)].map((_, i) => (
         <MaterialCommunityIcons
-          className="text-orange-400"
           key={`full-${i}`}
           name="star"
           color={orange[400]}
