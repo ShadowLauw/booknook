@@ -14,12 +14,16 @@ function RootStack() {
   const { isLoggedIn } = useAuth();
 
   return (
-    <Stack screenOptions={{ headerShown: false }}>
+    <Stack
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <Stack.Protected guard={isLoggedIn}>
-        <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="(protected)" />
       </Stack.Protected>
       <Stack.Protected guard={!isLoggedIn}>
-        <Stack.Screen name="(auth)" />
+        <Stack.Screen name="(auth)" options={{ gestureEnabled: false }} />
       </Stack.Protected>
     </Stack>
   );
