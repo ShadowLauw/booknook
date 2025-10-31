@@ -6,7 +6,11 @@ export default function ProtectedLayout() {
   const router = useRouter();
 
   // Seems like the guard doesn't automatically reroute if I try to access directly with the url
-  if (!isLoggedIn) return router.replace("/(auth)/login");
+  //if (!isLoggedIn) return router.replace("/(auth)/login");
 
-  return <Stack screenOptions={{ headerShown: false }} />;
+  return (
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="(tabs)" />
+    </Stack>
+  );
 }

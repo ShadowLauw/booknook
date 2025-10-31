@@ -3,14 +3,7 @@ import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { ChevronRightIcon } from "react-native-heroicons/outline";
 import { neutral } from "tailwindcss/colors";
 import Rating from "./Rating";
-
-type Book = {
-  id: string;
-  cover: string;
-  title: string;
-  author: string;
-  rating: number;
-};
+import { Book } from "@/types/book";
 
 export default function BookListScrollDisplay({ data }: { data: Book[] }) {
   const router = useRouter();
@@ -26,7 +19,12 @@ export default function BookListScrollDisplay({ data }: { data: Book[] }) {
           <View className="bg-white rounded-lg shadow m-2 w-44 flex-col justify-between">
             <TouchableOpacity
               className="p-2"
-              onPress={() => router.push(`/book/${item.id}`)}
+              onPress={() =>
+                router.push({
+                  pathname: "/[id]",
+                  params: { id: item.id, title: item.title },
+                })
+              }
             >
               <Image
                 source={{ uri: item.cover }}

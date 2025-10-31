@@ -1,5 +1,6 @@
 import { mockBooks } from "@/mock-data/books";
-import { FlatList, Image, SafeAreaView, Text, View } from "react-native";
+import { FlatList, Image, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function BookListDisplay() {
   return (

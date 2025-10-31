@@ -1,4 +1,5 @@
-import { Tabs } from "expo-router";
+import { NativeTabs, Icon, Label } from "expo-router/unstable-native-tabs";
+import { Platform } from "react-native";
 import {
   BookOpenIcon,
   HomeIcon,
@@ -8,39 +9,29 @@ import colors from "tailwindcss/colors";
 
 export default function TabLayout() {
   return (
-    <Tabs
-      screenOptions={{
-        animation: "none",
-        headerShown: true,
-        tabBarActiveTintColor: colors.amber[500],
-        tabBarShowLabel: true,
-        headerStyle: { backgroundColor: colors.amber[500] },
-        headerTintColor: "white",
-        headerTitleAlign: "center",
-      }}
-    >
-      <Tabs.Screen
-        name="(home)"
-        options={{
-          title: "Home",
-          headerShown: false,
-          tabBarIcon: ({ color }) => <HomeIcon size={24} color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="collection"
-        options={{
-          title: "My collections",
-          tabBarIcon: ({ color }) => <BookOpenIcon size={24} color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="account"
-        options={{
-          title: "My account",
-          tabBarIcon: ({ color }) => <UserIcon size={24} color={color} />,
-        }}
-      />
-    </Tabs>
+    <NativeTabs iconColor={colors.amber[500]}>
+      <NativeTabs.Trigger name="(home)">
+        {Platform.select({
+          ios: <Icon sf="house" />,
+          android: <Icon src={<HomeIcon size={24} />} />,
+        })}
+        <Label>Home</Label>
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="collection">
+        {Platform.select({
+          ios: <Icon sf="book" />,
+          android: <Icon src={<BookOpenIcon size={24} />} />,
+        })}
+        <Label>Collections</Label>
+      </NativeTabs.Trigger>
+
+      <NativeTabs.Trigger name="account">
+        {Platform.select({
+          ios: <Icon sf="person" />,
+          android: <Icon src={<UserIcon size={24} />} />,
+        })}
+        <Label>Account</Label>
+      </NativeTabs.Trigger>
+    </NativeTabs>
   );
 }
