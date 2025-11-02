@@ -17,7 +17,7 @@ export default function TabLayout() {
         })}
         <Label>Home</Label>
       </NativeTabs.Trigger>
-      <NativeTabs.Trigger name="collection">
+      <NativeTabs.Trigger name="collections">
         {Platform.select({
           ios: <Icon sf="book" />,
           android: <Icon src={<BookOpenIcon size={24} />} />,

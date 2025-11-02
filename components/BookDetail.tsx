@@ -101,7 +101,7 @@ export default function BookDetail({ book }: { book: Book }) {
             </View>
           </View>
         </ScrollView>
-        <View className="flex flex-row gap-2 absolute bottom-0 z-20 p-6 pb-4">
+        <View className="flex flex-row gap-2 absolute bottom-24 z-20 p-6 py-3">
           <TouchableOpacity className="flex-1 flex-row items-center justify-center gap-2 bg-amber-500 p-3 rounded-xl">
             <Text className="text-white font-semibold text-center">
               Add to wishlist
@@ -116,7 +116,6 @@ export default function BookDetail({ book }: { book: Book }) {
           </TouchableOpacity>
         </View>
       </View>
-      <SafeAreaView className="bg-gray-200" />
     </>
   );
 }
