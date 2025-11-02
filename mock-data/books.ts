@@ -34,7 +34,7 @@ export const mockBooks = [
   },
   {
     id: "4",
-    title: "Voyage au Centre de la Terre",
+    title: "Voyage au Centre de la Terre Centre de la Terre Centre de la Terre",
     author: "Jules Verne",
     cover:
       "https://images.pexels.com/photos/1051075/pexels-photo-1051075.jpeg?auto=compress&cs=tinysrgb&h=600",
