@@ -10,7 +10,7 @@ export default function AccountLayout() {
         headerTitleAlign: "center",
       }}
     >
-      <Stack.Screen name="account" options={{ title: "Account" }} />
+      <Stack.Screen name="account" options={{ title: "My account" }} />
     </Stack>
   );
 }

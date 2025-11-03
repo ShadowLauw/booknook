@@ -4,30 +4,58 @@ import { useAuthForm } from "@/hooks/useAuthForm";
 import { registerSchema } from "@/schemas/auth";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Pressable, Text, TouchableOpacity, View } from "react-native";
-import { AtSymbolIcon, LockClosedIcon } from "react-native-heroicons/outline";
+import {
+  ActivityIndicator,
+  Pressable,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import {
+  AtSymbolIcon,
+  LockClosedIcon,
+  UserIcon,
+} from "react-native-heroicons/outline";
 
 export default function RegisterPage() {
-  const { logIn } = useAuth();
+  const { signUp } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [authError, setAuthError] = useState("");
   const router = useRouter();
 
   const { form, errors, handleChange, handleSubmit } = useAuthForm(
     registerSchema,
-    { email: "", password: "", confirmPassword: "" }
+    { username: "", email: "", password: "", confirmPassword: "" }
   );
 
-  const onSubmit = () => {
-    if (handleSubmit()) {
-      console.log("Register ok", form);
-      logIn();
+  const onSubmit = async () => {
+    if (!handleSubmit()) return;
+
+    try {
+      setLoading(true);
+      setAuthError("");
+
+      await signUp(form.email, form.password, form.username);
+
       router.replace("/");
+    } catch (err: any) {
+      setAuthError(err.message || "Registration failed");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <View className="p-2 pt-16 flex items-center">
       <View className="max-w-96 items-center gap-6">
+        <AuthInput
+          icon={<UserIcon size={24} />}
+          placeholder="Username"
+          value={form.username}
+          onChangeText={(text) => handleChange("username", text)}
+          error={errors.username}
+        />
         <AuthInput
           icon={<AtSymbolIcon size={24} />}
           placeholder="Email"
@@ -53,11 +81,19 @@ export default function RegisterPage() {
           secureTextEntry={!showPassword}
           toggleSecure={() => setShowPassword(!showPassword)}
         />
+
+        {authError && <Text className="text-red-500">{authError}</Text>}
+
         <TouchableOpacity
           className="bg-amber-500 py-3 px-6 w-screen max-w-full rounded-xl"
           onPress={onSubmit}
+          disabled={loading}
         >
-          <Text className="text-white text-center font-bold">Register</Text>
+          {loading ? (
+            <ActivityIndicator color="white" />
+          ) : (
+            <Text className="text-white text-center font-bold">Register</Text>
+          )}
         </TouchableOpacity>
         <Pressable onPress={() => router.replace("/login")}>
           <Text className="text-amber-800 underline">
