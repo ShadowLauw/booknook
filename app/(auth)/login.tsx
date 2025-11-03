@@ -4,27 +4,42 @@ import { useAuthForm } from "@/hooks/useAuthForm";
 import { loginSchema } from "@/schemas/auth";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Pressable, Text, TouchableOpacity, View } from "react-native";
+import {
+  ActivityIndicator,
+  Pressable,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { AtSymbolIcon, LockClosedIcon } from "react-native-heroicons/outline";
 
 export default function LoginPage() {
-  const { logIn } = useAuth();
+  const router = useRouter();
+  const { signIn } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [authError, setAuthError] = useState("");
 
   const { form, errors, handleChange, handleSubmit } = useAuthForm(
     loginSchema,
     { email: "", password: "" }
   );
 
-  const onSubmit = () => {
-    if (handleSubmit()) {
-      console.log("Login ok", form);
-      logIn();
+  const onSubmit = async () => {
+    if (!handleSubmit()) return;
+
+    try {
+      setLoading(true);
+      setAuthError("");
+      await signIn(form.email, form.password);
+
       router.replace("/");
+    } catch (err: any) {
+      setAuthError(err.message || "Login failed");
+    } finally {
+      setLoading(false);
     }
   };
-
-  const router = useRouter();
 
   return (
     <View className="p-2 pt-16 flex items-center">
@@ -45,11 +60,19 @@ export default function LoginPage() {
           secureTextEntry={!showPassword}
           toggleSecure={() => setShowPassword(!showPassword)}
         />
+
+        {authError && <Text className="text-red-500">{authError}</Text>}
+
         <TouchableOpacity
           className="bg-amber-500 py-3 px-6 w-screen max-w-full rounded-xl"
           onPress={onSubmit}
+          disabled={loading}
         >
-          <Text className="text-white text-center font-bold">Login</Text>
+          {loading ? (
+            <ActivityIndicator color="white" />
+          ) : (
+            <Text className="text-white text-center font-bold">Login</Text>
+          )}
         </TouchableOpacity>
         <Pressable onPress={() => router.replace("/register")}>
           <Text className="text-amber-800 underline">

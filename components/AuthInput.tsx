@@ -1,6 +1,21 @@
+import { supabase } from "@/lib/supabase";
 import { ReactNode } from "react";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import {
+  AppState,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { EyeIcon, EyeSlashIcon } from "react-native-heroicons/outline";
+
+AppState.addEventListener("change", (state) => {
+  if (state === "active") {
+    supabase.auth.startAutoRefresh();
+  } else {
+    supabase.auth.stopAutoRefresh();
+  }
+});
 
 type AuthInputProps = {
   value: string;

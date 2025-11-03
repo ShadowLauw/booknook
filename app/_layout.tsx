@@ -14,7 +14,9 @@ export default function RootLayout() {
 }
 
 function RootStack() {
-  const { isLoggedIn } = useAuth();
+  const { session, loading } = useAuth();
+
+  if (loading) return null;
 
   return (
     <Stack
@@ -22,12 +24,12 @@ function RootStack() {
         headerShown: false,
       }}
     >
-      <Stack.Protected guard={true}>
+      <Stack.Protected guard={!!session}>
         <Stack.Screen name="(protected)" />
       </Stack.Protected>
-      {/* <Stack.Protected guard={!isLoggedIn}>
+      <Stack.Protected guard={!session}>
         <Stack.Screen name="(auth)" options={{ gestureEnabled: false }} />
-      </Stack.Protected> */}
+      </Stack.Protected>
     </Stack>
   );
 }
