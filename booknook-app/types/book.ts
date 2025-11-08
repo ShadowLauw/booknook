@@ -6,4 +6,9 @@ export type Book = {
   rating: number;
   summary: string;
   genre: string;
+  language: string;
+  isbn: string;
+  n_pages: number;
+  publisher: string;
+  publishing_date: string;
 };

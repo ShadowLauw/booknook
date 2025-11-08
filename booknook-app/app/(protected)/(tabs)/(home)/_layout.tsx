@@ -31,6 +31,7 @@ export default function HomeLayout() {
           ),
         })}
       />
+      <Stack.Screen name="search" options={{ title: "Search" }} />
     </Stack>
   );
 }

@@ -15,7 +15,6 @@ import {
 } from "react-native-heroicons/solid";
 import { useState } from "react";
 import { black } from "tailwindcss/colors";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { BookOpenIcon, HeartIcon } from "react-native-heroicons/outline";
 
 export default function BookDetail({ book }: { book: Book }) {
@@ -24,8 +23,8 @@ export default function BookDetail({ book }: { book: Book }) {
   return (
     <>
       <View className="flex-1 relative">
-        <ScrollView contentContainerClassName="pt-2 pb-12">
-          <View className="bg-gray-200 w-full absolute rounded-3xl min-h-screen top-60 p-4 z-5" />
+        <ScrollView contentContainerClassName="pt-2 pb-36">
+          <View className="bg-gray-200 w-full absolute rounded-3xl min-h-screen h-full top-60 p-4 z-5" />
           <View className="justify-center items-center mt-4">
             <View className="shadow-lg shadow-gray-500 rounded-lg">
               <Image
@@ -41,7 +40,7 @@ export default function BookDetail({ book }: { book: Book }) {
               <Text className="text-lg font-semibold font- text-center italic">
                 {book.author}
               </Text>
-              <Rating rating={book.rating} />
+              <Rating rating={book.rating} size={24} />
               <View className="mt-2 [&>*]:text-gray-700">
                 <Text className="font-semibold mb-1">Summary</Text>
                 <Text className="">{book.summary}</Text>
@@ -53,7 +52,7 @@ export default function BookDetail({ book }: { book: Book }) {
                   </Text>
                   <Text className="w-1/2">
                     <Text className="font-semibold">{"Language: "}</Text>
-                    <Text>{"ENGLISH"}</Text>
+                    <Text>{book.language}</Text>
                   </Text>
                 </View>
                 <HR />
@@ -70,28 +69,28 @@ export default function BookDetail({ book }: { book: Book }) {
                     {detailsOpen && (
                       <View className="flex flex-col gap-2 mt-2">
                         <View className="flex flex-row">
-                          <Text className="w-1/2">
+                          <View className="w-1/2">
                             <Text className="font-semibold">{"Pages: "}</Text>
-                            <Text>{"360"}</Text>
-                          </Text>
-                          <Text className="w-1/2">
+                            <Text>{book.n_pages}</Text>
+                          </View>
+                          <View className="w-1/2">
                             <Text className="font-semibold">{"ISBN: "}</Text>
-                            <Text>{"2222222222222"}</Text>
-                          </Text>
+                            <Text>{book.isbn}</Text>
+                          </View>
                         </View>
                         <View className="flex flex-row">
-                          <Text className="w-1/2">
+                          <View className="w-1/2">
                             <Text className="font-semibold">
                               {"Publisher: "}
                             </Text>
-                            <Text>{"Random Publishing LLC"}</Text>
-                          </Text>
-                          <Text className="w-1/2">
+                            <Text>{book.publisher}</Text>
+                          </View>
+                          <View className="w-1/2">
                             <Text className="font-semibold">
                               {"Publishing date: "}
                             </Text>
-                            <Text>{"2025-10-01"}</Text>
-                          </Text>
+                            <Text>{book.publishing_date}</Text>
+                          </View>
                         </View>
                       </View>
                     )}

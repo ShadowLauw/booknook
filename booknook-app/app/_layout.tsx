@@ -25,7 +25,7 @@ function RootStack() {
       }}
     >
       <Stack.Protected guard={!!session}>
-        <Stack.Screen name="(protected)" />
+        <Stack.Screen name="protected" />
       </Stack.Protected>
       <Stack.Protected guard={!session}>
         <Stack.Screen name="(auth)" options={{ gestureEnabled: false }} />

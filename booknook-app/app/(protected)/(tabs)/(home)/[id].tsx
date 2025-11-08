@@ -1,15 +1,30 @@
 import BookDetail from "@/components/BookDetail";
+import { getBook } from "@/lib/googleBooks";
 import { mockBooks } from "@/mock-data/books";
 import { Book } from "@/types/book";
 import { useLocalSearchParams } from "expo-router";
-import { Image, Text, View } from "react-native";
+import { useEffect, useState } from "react";
+import { ActivityIndicator, Image, Text, View } from "react-native";
 
 export default function BookDetailPage() {
   const { id } = useLocalSearchParams<{ id: string }>();
+  const [book, setBook] = useState<Book | undefined>(undefined);
 
-  const book = mockBooks.find((b) => b.id === id);
+  const fetchBook = async () => {
+    if (!id) return;
 
-  if (!book) return <Text>Book not found</Text>;
+    setBook(undefined);
+    try {
+      const res = await getBook(id);
+      setBook(res);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  useEffect(() => {
+    fetchBook();
+  }, [id]);
 
+  if (book === undefined) return <ActivityIndicator />;
   return <BookDetail book={book} />;
 }

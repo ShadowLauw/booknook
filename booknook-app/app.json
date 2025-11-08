@@ -1,22 +1,24 @@
 {
   "expo": {
-    "name": "booknook",
-    "slug": "booknook",
+    "name": "booknook-app",
+    "slug": "booknook-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "booknook",
+    "scheme": "booknook-app",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.booknookapp"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.anonymous.booknookapp"
     },
     "web": {
       "bundler": "metro",
@@ -33,7 +35,11 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ]
+      ],
+      "react-native-vision-camera",
+      {
+        "cameraPermissionText": "$(PRODUCT_NAME) needs access to your Camera."
+      }
     ],
     "experiments": {
       "typedRoutes": true
