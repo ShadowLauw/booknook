@@ -82,7 +82,6 @@ export default function SearchPage() {
         onEndReached={fetchBooks}
         onEndReachedThreshold={0.5}
         showsVerticalScrollIndicator={false}
-        maintainVisibleContentPosition={{ disabled: true }}
         ListFooterComponent={loading ? <ActivityIndicator /> : null}
       />
     </View>

@@ -1,32 +1,45 @@
 import { mockBooks } from "@/mock-data/books";
-import { FlatList, Image, Text, View } from "react-native";
+import { FlashList } from "@shopify/flash-list";
+import { ActivityIndicator, FlatList, Image, Text, View } from "react-native";
+import BookSummaryDisplay from "./BookSummaryDisplay";
+import { Book } from "@/types/book";
 
-export default function BookListDisplay() {
+type BookListDisplayProps = {
+  data: Book[];
+  onEndReached: () => void;
+  onEndReachedThreshold: number;
+  loading: boolean;
+  refreshing: boolean;
+  onRefresh: () => void;
+};
+export default function BookListDisplay({
+  data,
+  onEndReached,
+  onEndReachedThreshold = 0.5,
+  loading = false,
+  refreshing,
+  onRefresh,
+}: BookListDisplayProps) {
   return (
-    <View className="flex-1">
-      <FlatList
-        data={mockBooks}
-        numColumns={2}
-        columnWrapperClassName="gap-4 px-4"
-        contentContainerClassName="gap-4 py-4 pb-28"
-        renderItem={({ item }) => (
-          <View className="bg-white rounded-lg shadow flex-1">
-            <Image
-              source={{ uri: item.cover }}
-              className="h-60 w-full rounded-t-lg p-2 pb-0"
-            />
-            <View className="p-2">
-              <Text
-                numberOfLines={1}
-                ellipsizeMode="tail"
-                className="font-bold text-base"
-              >
-                {item.title}
-              </Text>
-            </View>
-          </View>
-        )}
-      />
-    </View>
+    <FlashList
+      className="pb-24"
+      refreshing={refreshing}
+      data={data}
+      keyExtractor={(item) => item.id}
+      numColumns={3}
+      renderItem={({ item }) => <BookSummaryDisplay book={item} />}
+      onEndReached={onEndReached}
+      onEndReachedThreshold={onEndReachedThreshold}
+      onRefresh={onRefresh}
+      showsVerticalScrollIndicator={false}
+      ListEmptyComponent={
+        <Text className="text-center text-gray-500 mt-4">
+          No books found. Pull to refresh.
+        </Text>
+      }
+      ListFooterComponent={
+        loading && !refreshing ? <ActivityIndicator /> : null
+      }
+    />
   );
 }

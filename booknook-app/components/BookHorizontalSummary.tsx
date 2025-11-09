@@ -22,7 +22,7 @@ export default function BookHorizontalSummary({ book }: { book: Book }) {
         <Text numberOfLines={3} ellipsizeMode="tail" className="font-medium">
           {book.title}
         </Text>
-        <Text className="text-gray-500 text-sm">{book.author}</Text>
+        <Text className="text-gray-500 text-sm">{book.authors}</Text>
       </View>
     </TouchableOpacity>
   );

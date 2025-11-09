@@ -33,7 +33,7 @@ export default function BookSummaryDisplay({ book }: { book: Book }) {
             ellipsizeMode="tail"
             className="text-xs text-gray-500"
           >
-            {book.author}
+            {book.authors}
           </Text>
           <Rating rating={book.rating} size={12} />
         </View>

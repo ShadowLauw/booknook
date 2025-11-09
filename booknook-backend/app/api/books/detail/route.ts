@@ -38,7 +38,7 @@ export async function GET(req: Request) {
         info.imageLinks?.[0] ||
         "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg",
       title: info.title || "Untitled",
-      author: info.authors?.join(", ") || "Unknown",
+      authors: info.authors?.join(", ") || "Unknown",
       rating: info.averageRating || 0,
       summary: cleanSummary(info.description) || "",
       genre: info.categories?.[0] || "Unknown",
