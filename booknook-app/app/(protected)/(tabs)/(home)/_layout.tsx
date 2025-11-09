@@ -21,16 +21,9 @@ export default function HomeLayout() {
       />
       <Stack.Screen
         name="[id]"
-        options={({ route }) => ({
-          title:
-            (route.params as { id: string; title: string })?.title ??
-            "Title not found",
-          headerBackButtonDisplayMode: "minimal",
-          headerRight: () => (
-            <WishlistHeartButton className="py-2 h-max w-10 flex items-center justify-center" />
-          ),
-        })}
+        options={{ headerBackButtonDisplayMode: "minimal" }}
       />
+      <Stack.Screen name="search" options={{ title: "Search" }} />
     </Stack>
   );
 }

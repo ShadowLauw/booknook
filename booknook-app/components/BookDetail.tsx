@@ -13,20 +13,57 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from "react-native-heroicons/solid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { black } from "tailwindcss/colors";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { BookOpenIcon, HeartIcon } from "react-native-heroicons/outline";
+import {
+  addToLibrary,
+  isBookInLibrary,
+  removeFromLibrary,
+} from "@/lib/userBooks";
 
 export default function BookDetail({ book }: { book: Book }) {
   const [detailsOpen, setDetailsOpen] = useState<boolean>(false);
+  const [isAdded, setIsAdded] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchStatus = async () => {
+      try {
+        const exists = await isBookInLibrary(book.id);
+        setIsAdded(exists);
+      } catch (err) {
+        console.error("Failed to check library:", err);
+      }
+    };
+    fetchStatus();
+  }, [book]);
+
+  const handleToggleLibrary = async () => {
+    if (loading) return;
+    setLoading(true);
+
+    try {
+      if (isAdded) {
+        await removeFromLibrary(book.id);
+        setIsAdded(false);
+      } else {
+        await addToLibrary(book);
+        setIsAdded(true);
+      }
+    } catch (err) {
+      console.error("Failed to toggle library:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
       <View className="flex-1 relative">
-        <ScrollView contentContainerClassName="pt-2 pb-12">
-          <View className="bg-gray-200 w-full absolute rounded-3xl min-h-screen top-60 p-4 z-5" />
-          <View className="justify-center items-center mt-4">
+        <ScrollView contentContainerClassName="pt-2">
+          <View className="bg-gray-200 w-full absolute rounded-3xl min-h-[200vh] flex-1 top-60 p-4 z-5" />
+          <View className="justify-center items-center mt-4 pb-36">
             <View className="shadow-lg shadow-gray-500 rounded-lg">
               <Image
                 source={{ uri: book.cover }}
@@ -39,9 +76,9 @@ export default function BookDetail({ book }: { book: Book }) {
                 {book.title}
               </Text>
               <Text className="text-lg font-semibold font- text-center italic">
-                {book.author}
+                {book.authors}
               </Text>
-              <Rating rating={book.rating} />
+              <Rating rating={book.rating} size={24} />
               <View className="mt-2 [&>*]:text-gray-700">
                 <Text className="font-semibold mb-1">Summary</Text>
                 <Text className="">{book.summary}</Text>
@@ -53,7 +90,7 @@ export default function BookDetail({ book }: { book: Book }) {
                   </Text>
                   <Text className="w-1/2">
                     <Text className="font-semibold">{"Language: "}</Text>
-                    <Text>{"ENGLISH"}</Text>
+                    <Text>{book.language}</Text>
                   </Text>
                 </View>
                 <HR />
@@ -70,28 +107,28 @@ export default function BookDetail({ book }: { book: Book }) {
                     {detailsOpen && (
                       <View className="flex flex-col gap-2 mt-2">
                         <View className="flex flex-row">
-                          <Text className="w-1/2">
+                          <View className="w-1/2">
                             <Text className="font-semibold">{"Pages: "}</Text>
-                            <Text>{"360"}</Text>
-                          </Text>
-                          <Text className="w-1/2">
+                            <Text>{book.n_pages}</Text>
+                          </View>
+                          <View className="w-1/2">
                             <Text className="font-semibold">{"ISBN: "}</Text>
-                            <Text>{"2222222222222"}</Text>
-                          </Text>
+                            <Text>{book.isbn}</Text>
+                          </View>
                         </View>
                         <View className="flex flex-row">
-                          <Text className="w-1/2">
+                          <View className="w-1/2">
                             <Text className="font-semibold">
                               {"Publisher: "}
                             </Text>
-                            <Text>{"Random Publishing LLC"}</Text>
-                          </Text>
-                          <Text className="w-1/2">
+                            <Text>{book.publisher}</Text>
+                          </View>
+                          <View className="w-1/2">
                             <Text className="font-semibold">
                               {"Publishing date: "}
                             </Text>
-                            <Text>{"2025-10-01"}</Text>
-                          </Text>
+                            <Text>{book.publishing_date}</Text>
+                          </View>
                         </View>
                       </View>
                     )}
@@ -102,15 +139,12 @@ export default function BookDetail({ book }: { book: Book }) {
           </View>
         </ScrollView>
         <View className="flex flex-row gap-2 absolute bottom-24 z-20 p-6 py-3">
-          <TouchableOpacity className="flex-1 flex-row items-center justify-center gap-2 bg-amber-500 p-3 rounded-xl">
+          <TouchableOpacity
+            onPress={handleToggleLibrary}
+            className={`flex-1 flex-row items-center justify-center gap-2 ${isAdded ? "bg-red-500" : "bg-amber-500"} p-3 rounded-xl`}
+          >
             <Text className="text-white font-semibold text-center">
-              Add to wishlist
-            </Text>
-            <HeartIcon size={20} color={"white"} />
-          </TouchableOpacity>
-          <TouchableOpacity className="flex-1 flex-row items-center justify-center gap-2 bg-red-500 p-3 rounded-xl">
-            <Text className="text-white font-semibold text-center">
-              Add to collection
+              {isAdded ? "Remove from libray" : "Add to library"}
             </Text>
             <BookOpenIcon size={20} color={"white"} />
           </TouchableOpacity>

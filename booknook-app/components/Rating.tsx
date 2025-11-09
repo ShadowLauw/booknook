@@ -4,9 +4,10 @@ import { orange } from "tailwindcss/colors";
 
 type RatingProps = {
   rating: number;
+  size: number;
 };
 
-export default function Rating({ rating }: RatingProps) {
+export default function Rating({ rating, size }: RatingProps) {
   const starFull = Math.floor(rating);
   const starHalf = Math.round(rating % 1);
   const starEmpty = 5 - starFull - starHalf;
@@ -18,14 +19,14 @@ export default function Rating({ rating }: RatingProps) {
           key={`full-${i}`}
           name="star"
           color={orange[400]}
-          size={16}
+          size={size}
         />
       ))}
       {starHalf === 1 && (
         <MaterialCommunityIcons
           name="star-half-full"
           color={orange[400]}
-          size={16}
+          size={size}
         />
       )}
       {[...Array(starEmpty)].map((_, i) => (
@@ -33,7 +34,7 @@ export default function Rating({ rating }: RatingProps) {
           key={`empty-${i}`}
           name="star-outline"
           color={orange[400]}
-          size={16}
+          size={size}
         />
       ))}
       <Text className="px-1 text-orange-400 text-sm">
