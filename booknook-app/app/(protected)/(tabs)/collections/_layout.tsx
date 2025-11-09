@@ -28,7 +28,7 @@ export default function CollectionsLayout() {
         ),
       }}
     >
-      <Stack.Screen name="collections" options={{ title: "My collections" }} />
+      <Stack.Screen name="index" options={{ title: "My collections" }} />
     </Stack>
   );
 }
