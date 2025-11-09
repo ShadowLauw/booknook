@@ -46,9 +46,7 @@ export async function isBookInLibrary(bookId: string): Promise<boolean> {
   return !!data;
 }
 
-export async function addToWishlist(bookId: string) {
-  const book = await getBook(bookId);
-
+export async function addToWishlist(book: Book) {
   const { error: bookError } = await supabase.from("books").upsert(
     {
       id: book.id,

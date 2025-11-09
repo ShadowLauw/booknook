@@ -32,6 +32,7 @@ export default function BookListDisplay({
       onEndReachedThreshold={onEndReachedThreshold}
       onRefresh={onRefresh}
       showsVerticalScrollIndicator={false}
+      contentContainerClassName="flex-1"
       ListEmptyComponent={
         <Text className="text-center text-gray-500 mt-4">
           No books found. Pull to refresh.

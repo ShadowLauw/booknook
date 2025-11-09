@@ -11,10 +11,10 @@ import type { Book } from "@/types/book";
 
 export default function WishlistHeartButton({
   className,
-  bookId,
+  book,
 }: {
   className?: string;
-  bookId: string;
+  book: Book;
 }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -22,14 +22,14 @@ export default function WishlistHeartButton({
   useEffect(() => {
     const fetchStatus = async () => {
       try {
-        const exists = await isBookInWishlist(bookId);
+        const exists = await isBookInWishlist(book.id);
         setIsFavorite(exists);
       } catch (err) {
         console.error("Failed to check wishlist:", err);
       }
     };
     fetchStatus();
-  }, [bookId]);
+  }, [book]);
 
   const handleToggleWishlist = async () => {
     if (loading) return;
@@ -37,10 +37,10 @@ export default function WishlistHeartButton({
 
     try {
       if (isFavorite) {
-        await removeFromWishlist(bookId);
+        await removeFromWishlist(book.id);
         setIsFavorite(false);
       } else {
-        await addToWishlist(bookId);
+        await addToWishlist(book);
         setIsFavorite(true);
       }
     } catch (err) {
