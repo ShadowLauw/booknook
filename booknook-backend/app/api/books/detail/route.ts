@@ -34,8 +34,8 @@ export async function GET(req: Request) {
     const book = {
       id: data.id,
       cover:
-        info.imageLinks?.thumbnail ||
-        info.imageLinks?.[0] ||
+        info.imageLinks?.thumbnail?.replace(/^http:\/\//i, "https://") ||
+        info.imageLinks?.[0]?.replace(/^http:\/\//i, "https://") ||
         "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg",
       title: info.title || "Untitled",
       authors: info.authors?.join(", ") || "Unknown",
