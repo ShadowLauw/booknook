@@ -13,7 +13,7 @@ export default function CollectionsLayout() {
         headerRight: () => (
           <Pressable
             onPress={() => console.log("Add new item")}
-            className="p-2 rounded-full active:opacity-70"
+            className="p-2 rounded-full"
           >
             <PlusIcon size={24} color="black" />
           </Pressable>
