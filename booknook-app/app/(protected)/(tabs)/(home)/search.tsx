@@ -89,7 +89,6 @@ export default function SearchPage() {
           onEndReached={fetchBooks}
           onEndReachedThreshold={0.5}
           showsVerticalScrollIndicator={false}
-          columnWrapperStyle={{}}
           ListFooterComponent={loading ? <ActivityIndicator /> : null}
         />
       </View>

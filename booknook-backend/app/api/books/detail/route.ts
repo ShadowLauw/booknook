@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const q = searchParams.get("q");
+  const byIsbn = searchParams.get("isbn") === "true";
 
   if (!q) {
     return NextResponse.json(
@@ -15,17 +16,26 @@ export async function GET(req: Request) {
     const params = [
       `fields=id,volumeInfo(title,authors,imageLinks,averageRating,description,categories,language,industryIdentifiers,pageCount,publisher,publishedDate)`,
     ].join("&");
-    const res = await fetch(
-      `https://www.googleapis.com/books/v1/volumes/${encodeURIComponent(
+    let url: string;
+
+    if (byIsbn) {
+      url = `https://www.googleapis.com/books/v1/volumes/${encodeURIComponent(
         q
-      )}?${params}`
-    );
+      )}?${params}`;
+    } else {
+      url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(
+        q
+      )}&${params}`;
+    }
+    const res = await fetch(url);
 
     if (!res.ok) {
       throw new Error(`Google Books API error: ${res.status}`);
     }
 
-    const data = await res.json();
+    let data = await res.json();
+
+    if (byIsbn) data = data.items[0];
 
     const info = data.volumeInfo;
     const book = {

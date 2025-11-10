@@ -12,9 +12,9 @@ export async function searchBooks(
   return res.json();
 }
 
-export async function getBook(id: string) {
+export async function getBook(id: string, isbn: boolean) {
   const res = await fetch(
-    `${apiUrl}/api/books/detail?q=${encodeURIComponent(id)}`
+    `${apiUrl}/api/books/detail?q=${encodeURIComponent(id)}&isbn=${encodeURIComponent(isbn)}`
   );
   if (!res.ok) throw new Error("Failed to fetch the book");
   return res.json();

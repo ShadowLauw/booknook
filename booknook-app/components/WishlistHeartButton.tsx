@@ -57,9 +57,9 @@ export default function WishlistHeartButton({
       disabled={loading}
     >
       {isFavorite ? (
-        <HeartSolid size={24} color="white" />
+        <HeartSolid size={24} color="black" />
       ) : (
-        <HeartOutline size={24} color="white" />
+        <HeartOutline size={24} color="black" />
       )}
     </Pressable>
   );

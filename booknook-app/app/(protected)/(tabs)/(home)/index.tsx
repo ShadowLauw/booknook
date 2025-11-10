@@ -48,7 +48,10 @@ export default function HomePage() {
             }
           }}
         />
-        <TouchableOpacity className="flex-row items-center gap-2 bg-white p-2 rounded-md shadow-sm">
+        <TouchableOpacity
+          onPress={() => router.push("/scanner")}
+          className="flex-row items-center gap-2 bg-white p-2 rounded-md shadow-sm"
+        >
           <MaterialCommunityIcons
             className="justify-end"
             name="barcode-scan"

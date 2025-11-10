@@ -21,9 +21,15 @@ export default function HomeLayout() {
       />
       <Stack.Screen
         name="[id]"
-        options={{ headerBackButtonDisplayMode: "minimal" }}
+        options={({ route }) => ({
+          title:
+            (route.params as { id: string; title: string })?.title ??
+            "Book details",
+          headerBackButtonDisplayMode: "minimal",
+        })}
       />
       <Stack.Screen name="search" options={{ title: "Search" }} />
+      <Stack.Screen name="scanner" options={{ title: "Scan a book" }} />
     </Stack>
   );
 }

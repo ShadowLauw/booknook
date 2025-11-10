@@ -144,7 +144,7 @@ export default function BookDetail({ book }: { book: Book }) {
             className={`flex-1 flex-row items-center justify-center gap-2 ${isAdded ? "bg-red-500" : "bg-amber-500"} p-3 rounded-xl`}
           >
             <Text className="text-white font-semibold text-center">
-              {isAdded ? "Remove from libray" : "Add to library"}
+              {isAdded ? "Remove from library" : "Add to library"}
             </Text>
             <BookOpenIcon size={20} color={"white"} />
           </TouchableOpacity>
