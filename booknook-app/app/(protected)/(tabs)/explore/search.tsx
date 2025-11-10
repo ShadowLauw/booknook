@@ -59,7 +59,7 @@ export default function SearchPage() {
           onSubmit={() => {
             if (searchQuery.trim()) {
               router.replace(
-                `/search?query=${encodeURIComponent(searchQuery)}`
+                `./search?query=${encodeURIComponent(searchQuery)}`
               );
             }
           }}

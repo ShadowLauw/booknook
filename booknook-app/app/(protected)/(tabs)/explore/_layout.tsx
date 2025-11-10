@@ -1,9 +1,5 @@
-import WishlistHeartButton from "@/components/WishlistHeartButton";
 import { Stack } from "expo-router";
-import { Button, View } from "react-native";
-import { HeartIcon as HeartOutline } from "react-native-heroicons/outline";
-import { HeartIcon as HeartSolid } from "react-native-heroicons/solid";
-import colors, { black } from "tailwindcss/colors";
+import colors from "tailwindcss/colors";
 
 export default function HomeLayout() {
   return (
