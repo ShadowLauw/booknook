@@ -6,7 +6,7 @@ export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const q = searchParams.get("q");
   const start = parseInt(searchParams.get("startIndex") || "0");
-  const limit = parseInt(searchParams.get("maxResults") || "3");
+  const limit = parseInt(searchParams.get("maxResults") || "20");
 
   if (!q) {
     return NextResponse.json(
@@ -19,9 +19,8 @@ export async function GET(req: Request) {
     const params = [
       `q=${encodeURIComponent(q)}`,
       `fields=items(id,volumeInfo(title,authors,imageLinks,averageRating,description,categories,language,industryIdentifiers,pageCount,publisher,publishedDate))`,
-      `maxResults=${limit}`,
       `startIndex=${start}`,
-      `key=${GOOGLE_API_KEY}`,
+      `maxResults=${limit}`,
     ].join("&");
     const res = await fetch(
       `https://www.googleapis.com/books/v1/volumes?${params}`
