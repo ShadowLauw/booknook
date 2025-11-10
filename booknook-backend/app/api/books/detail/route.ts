@@ -14,8 +14,13 @@ export async function GET(req: Request) {
 
   try {
     const params = [
-      `fields=id,volumeInfo(title,authors,imageLinks,averageRating,description,categories,language,industryIdentifiers,pageCount,publisher,publishedDate)`,
+      `fields=${
+        byIsbn ? "items(" : ""
+      }id,volumeInfo(title,authors,imageLinks,averageRating,description,categories,language,industryIdentifiers,pageCount,publisher,publishedDate)${
+        byIsbn ? ")" : ""
+      }`,
     ].join("&");
+
     let url: string;
 
     if (byIsbn) {
