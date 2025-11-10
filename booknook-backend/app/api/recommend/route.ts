@@ -41,6 +41,7 @@ Réponds UNIQUEMENT en JSON, sous le format :
     });
 
     const data = await res.json();
+    console.log({ data });
 
     const content = data.choices?.[0]?.message?.content ?? "";
     console.log({ content });
