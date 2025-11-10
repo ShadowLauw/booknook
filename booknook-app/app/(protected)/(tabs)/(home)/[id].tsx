@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { ActivityIndicator, Image, Text, View } from "react-native";
 
 export default function BookDetailPage() {
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id, isbn } = useLocalSearchParams<{ id: string; isbn: string }>();
   const [book, setBook] = useState<Book | undefined>(undefined);
   const navigation = useNavigation();
 
@@ -16,7 +16,7 @@ export default function BookDetailPage() {
 
     setBook(undefined);
     try {
-      const res = await getBook(id);
+      const res = await getBook(id, isbn === "true");
       setBook(res);
     } catch (err) {
       console.error(err);

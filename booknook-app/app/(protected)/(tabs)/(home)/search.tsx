@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
-import { View, Text, ActivityIndicator, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  ActivityIndicator,
+  TouchableOpacity,
+  FlatList,
+} from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { FlashList } from "@shopify/flash-list";
 import { Book } from "@/types/book";
@@ -73,17 +79,19 @@ export default function SearchPage() {
           </Text>
         </TouchableOpacity>
       </View>
-      <FlashList
-        className="pb-24"
-        data={books}
-        keyExtractor={(item) => item.id}
-        numColumns={3}
-        renderItem={({ item }) => <BookSummaryDisplay book={item} />}
-        onEndReached={fetchBooks}
-        onEndReachedThreshold={0.5}
-        showsVerticalScrollIndicator={false}
-        ListFooterComponent={loading ? <ActivityIndicator /> : null}
-      />
+      <View className="flex items-center">
+        <FlatList
+          className="pb-24"
+          data={books}
+          keyExtractor={(item) => item.id}
+          numColumns={3}
+          renderItem={({ item }) => <BookSummaryDisplay book={item} />}
+          onEndReached={fetchBooks}
+          onEndReachedThreshold={0.5}
+          showsVerticalScrollIndicator={false}
+          ListFooterComponent={loading ? <ActivityIndicator /> : null}
+        />
+      </View>
     </View>
   );
 }

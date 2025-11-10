@@ -6,7 +6,7 @@ import { Book } from "@/types/book";
 export default function BookSummaryDisplay({ book }: { book: Book }) {
   const router = useRouter();
   return (
-    <View className="bg-white rounded-lg shadow m-2 flex-col justify-between">
+    <View className="bg-white rounded-lg shadow m-2 flex-col justify-between w-32">
       <TouchableOpacity
         className="p-2"
         onPress={() =>
