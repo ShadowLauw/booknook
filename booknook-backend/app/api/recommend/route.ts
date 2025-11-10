@@ -34,7 +34,7 @@ Réponds UNIQUEMENT en JSON, sous le format :
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "gpt-3.5-turbo",
+        model: "gpt-5-mini",
         messages: [{ role: "user", content: prompt }],
         temperature: 0.8,
       }),
@@ -43,6 +43,7 @@ Réponds UNIQUEMENT en JSON, sous le format :
     const data = await res.json();
 
     const content = data.choices?.[0]?.message?.content ?? "";
+    console.log({ content });
     let recommendations;
 
     try {
