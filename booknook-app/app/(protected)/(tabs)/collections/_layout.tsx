@@ -10,14 +10,6 @@ export default function CollectionsLayout() {
         headerStyle: { backgroundColor: colors.amber[500] },
         headerTintColor: "white",
         headerTitleAlign: "center",
-        headerLeft: () => (
-          <Pressable
-            onPress={() => console.log("Open search")}
-            className="p-2 rounded-full active:opacity-70"
-          >
-            <MagnifyingGlassIcon size={22} color="black" />
-          </Pressable>
-        ),
         headerRight: () => (
           <Pressable
             onPress={() => console.log("Add new item")}
