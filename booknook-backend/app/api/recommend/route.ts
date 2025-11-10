@@ -38,7 +38,7 @@ Réponds UNIQUEMENT en JSON, sous le format :
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "gpt-5-mini",
+        model: "gpt-4.1-nano",
         messages: [{ role: "user", content: prompt }],
         temperature: 0.8,
       }),
