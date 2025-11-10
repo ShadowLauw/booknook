@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
 
-const GOOGLE_API_KEY = process.env.GOOGLE_BOOKS_API_KEY!;
-
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const q = searchParams.get("q");
