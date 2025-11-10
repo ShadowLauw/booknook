@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const OPENAI_KEY = process.env.OPENAI_API_KEY!;
+const OPENAI_KEY = process.env.OPENAI_API_KEY;
 
 export async function POST(req: Request) {
   try {
@@ -26,6 +26,10 @@ Réponds UNIQUEMENT en JSON, sous le format :
   { "title": "Titre", "authors": "Auteurs", "reason": "Pourquoi ce livre lui plairait" }
 ]
 `;
+
+    if (!OPENAI_KEY) {
+      throw new Error("OpenAI API key not set");
+    }
 
     const res = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
