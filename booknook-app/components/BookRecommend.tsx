@@ -8,18 +8,18 @@ export default function BookRecommend({ titles }: { titles: string[] }) {
   const [books, setBooks] = useState<Book[]>([]);
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchBooks = async () => {
-      try {
-        const fetchedBooks = await Promise.all(
-          titles.map((title) => getBookByTitle(title))
-        );
-        setBooks(fetchedBooks.filter(Boolean));
-      } catch (err) {
-        console.error("Error fetching recommended books:", err);
-      }
-    };
+  const fetchBooks = async () => {
+    try {
+      const fetchedBooks = await Promise.all(
+        titles.map((title) => getBookByTitle(title))
+      );
+      setBooks(fetchedBooks.filter(Boolean));
+    } catch (err) {
+      console.error("Error fetching recommended books:", err);
+    }
+  };
 
+  useEffect(() => {
     if (titles && titles.length > 0) {
       fetchBooks();
     }
@@ -29,6 +29,12 @@ export default function BookRecommend({ titles }: { titles: string[] }) {
     <FlatList
       data={books}
       keyExtractor={(item) => item.id}
+      contentContainerClassName="pb-24"
+      ListHeaderComponent={() => (
+        <Text className="px-3 py-2 text-xl font-semibold">
+          Recommended for you
+        </Text>
+      )}
       renderItem={({ item }) => (
         <TouchableOpacity
           onPress={() =>
@@ -37,7 +43,7 @@ export default function BookRecommend({ titles }: { titles: string[] }) {
               params: { id: item.id, title: item.title },
             })
           }
-          className="flex-row bg-white rounded-xl shadow p-3 my-2"
+          className="flex-row bg-white rounded-xl shadow p-3 mx-4 my-2"
         >
           <Image
             source={{ uri: item.cover }}
@@ -63,7 +69,6 @@ export default function BookRecommend({ titles }: { titles: string[] }) {
           </View>
         </TouchableOpacity>
       )}
-      contentContainerStyle={{ paddingBottom: 12 }}
       showsVerticalScrollIndicator={false}
     />
   );

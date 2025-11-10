@@ -15,15 +15,15 @@ export async function POST(req: Request) {
     }
 
     const prompt = `
-L'utilisateur possède les livres suivants :
+A user has these books in their librarx :
 ${userBooks
   .map((b: any) => `- ${b.title} -- ${b.authors} -- ${b.genre}`)
   .join("\n")}
 
-Recommande 5 autres livres qu'il pourrait aimer.
-Réponds UNIQUEMENT en JSON, sous le format :
+Recommend 5 other books the user might like.
+Respond ONLY in JSON, in the following format:
 [
-  { "title": "Titre", "authors": "Auteurs", "reason": "Pourquoi ce livre lui plairait" }
+  { "title": "Book Title" }
 ]
 `;
 
@@ -45,10 +45,7 @@ Réponds UNIQUEMENT en JSON, sous le format :
     });
 
     const data = await res.json();
-    console.log({ data });
-
     const content = data.choices?.[0]?.message?.content ?? "";
-    console.log({ content });
     let recommendations;
 
     try {
