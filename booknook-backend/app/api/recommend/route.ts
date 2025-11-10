@@ -17,18 +17,13 @@ export async function POST(req: Request) {
     const prompt = `
 L'utilisateur possède les livres suivants :
 ${userBooks
-  .map(
-    (b: any) =>
-      `- ${b.title}${b.authors ? " — " + b.authors.join(", ") : ""}${
-        b.categories ? " — " + b.categories.join(", ") : ""
-      }`
-  )
+  .map((b: any) => `- ${b.title} -- ${b.authors} -- ${b.genre}`)
   .join("\n")}
 
 Recommande 5 autres livres qu'il pourrait aimer.
 Réponds UNIQUEMENT en JSON, sous le format :
 [
-  { "title": "Titre", "authors": "Auteur", "reason": "Pourquoi ce livre lui plairait" }
+  { "title": "Titre", "authors": "Auteurs", "reason": "Pourquoi ce livre lui plairait" }
 ]
 `;
 
