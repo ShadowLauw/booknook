@@ -133,9 +133,7 @@ export default function HomePage() {
                 <View className="flex-1">
                   <Text className="text-lg font-semibold">{book.title}</Text>
                   {book.authors && (
-                    <Text className="text-gray-500">
-                      {book.authors.join(", ")}
-                    </Text>
+                    <Text className="text-gray-500">{book.authors}</Text>
                   )}
                   <Text className="text-lg font-semibold">{book.reason}</Text>
                 </View>
