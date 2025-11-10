@@ -15,6 +15,7 @@ export async function GET(req: Request) {
 
   try {
     const params = [
+      `key=${GOOGLE_API_KEY}`,
       `fields=id,volumeInfo(title,authors,imageLinks,averageRating,description,categories,language,industryIdentifiers,pageCount,publisher,publishedDate)`,
     ].join("&");
     const res = await fetch(
