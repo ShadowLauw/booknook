@@ -12,6 +12,8 @@ export default function BookScanner() {
   const router = useRouter();
   const device = useCameraDevice("back");
   const { hasPermission, requestPermission } = useCameraPermission();
+  const [isCooldown, setIsCooldown] = useState(false);
+  const SCAN_COOLDOWN = 2000;
 
   useEffect(() => {
     if (!hasPermission) {
@@ -22,9 +24,13 @@ export default function BookScanner() {
   const codeScanner = useCodeScanner({
     codeTypes: ["ean-13"],
     onCodeScanned: (codes) => {
+      if (isCooldown) return;
+
+      setIsCooldown(true);
+      setTimeout(() => setIsCooldown(false), SCAN_COOLDOWN);
       router.push({
         pathname: "/[id]",
-        params: { id: codes[0].toString(), isbn: "true" },
+        params: { id: codes[0].value!, isbn: "true" },
       });
     },
   });

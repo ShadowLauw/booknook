@@ -19,13 +19,13 @@ export async function GET(req: Request) {
     let url: string;
 
     if (byIsbn) {
+      url = `https://www.googleapis.com/books/v1/volumes?q=isbn:${encodeURIComponent(
+        q
+      )}&${params}`;
+    } else {
       url = `https://www.googleapis.com/books/v1/volumes/${encodeURIComponent(
         q
       )}?${params}`;
-    } else {
-      url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(
-        q
-      )}&${params}`;
     }
     const res = await fetch(url);
 
