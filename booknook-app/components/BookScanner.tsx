@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import {
   Camera,
@@ -12,7 +12,7 @@ export default function BookScanner() {
   const router = useRouter();
   const device = useCameraDevice("back");
   const { hasPermission, requestPermission } = useCameraPermission();
-  const [isCooldown, setIsCooldown] = useState(false);
+  const cooldownActive = useRef(false);
   const SCAN_COOLDOWN = 2000;
 
   useEffect(() => {
@@ -24,10 +24,10 @@ export default function BookScanner() {
   const codeScanner = useCodeScanner({
     codeTypes: ["ean-13"],
     onCodeScanned: (codes) => {
-      if (isCooldown) return;
+      if (cooldownActive.current) return;
 
-      setIsCooldown(true);
-      setTimeout(() => setIsCooldown(false), SCAN_COOLDOWN);
+      cooldownActive.current = true;
+      setTimeout(() => (cooldownActive.current = false), SCAN_COOLDOWN);
       router.push({
         pathname: "/[id]",
         params: { id: codes[0].value!, isbn: "true" },
