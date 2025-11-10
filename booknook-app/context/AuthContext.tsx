@@ -115,6 +115,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         .eq("id", data.user.id);
 
       if (updateError) console.error("Update profile failed:", updateError);
+
+      setUser({
+        id: data.user.id,
+        email: data.user.email,
+        username,
+      });
     }
   };
 

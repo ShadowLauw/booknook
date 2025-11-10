@@ -32,8 +32,6 @@ export default function LoginPage() {
       setLoading(true);
       setAuthError("");
       await signIn(form.email, form.password);
-
-      router.replace("/");
     } catch (err: any) {
       setAuthError(err.message || "Login failed");
     } finally {
