@@ -8,7 +8,7 @@ export default function BookHorizontalSummary({ book }: { book: Book }) {
     <TouchableOpacity
       onPress={() =>
         router.push({
-          pathname: "/[id]",
+          pathname: "/explore/[id]",
           params: { id: book.id, title: book.title },
         })
       }

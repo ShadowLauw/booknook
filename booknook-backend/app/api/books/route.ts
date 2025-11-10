@@ -41,7 +41,7 @@ export async function GET(req: Request) {
         title: info.title || "Untitled",
         authors: info.authors?.join(", ") || "Unknown",
         rating: info.averageRating || 0,
-        summary: info.description || "",
+        summary: cleanSummary(info.description) || "",
         genre: info.categories?.[0] || "Unknown",
         language: info.language || "Unknown",
         isbn:
@@ -64,4 +64,22 @@ export async function GET(req: Request) {
       { status: 500 }
     );
   }
+}
+
+function cleanSummary(html: string | undefined) {
+  if (!html) return "";
+  let decoded = html
+    .replace(/\\u003c/g, "<")
+    .replace(/\\u003e/g, ">")
+    .replace(/\\u0026/g, "&")
+    .replace(/\\u0022/g, '"')
+    .replace(/\\u0027/g, "'");
+
+  decoded = decoded
+    .replace(/<(br|p|div|li|h[1-6])[^>]*>/gi, "\n")
+    .replace(/<\/(p|div|li|h[1-6])>/gi, "\n");
+
+  decoded = decoded.replace(/<[^>]+>/g, "");
+
+  return decoded;
 }

@@ -29,7 +29,7 @@ export default function BookScanner() {
       cooldownActive.current = true;
       setTimeout(() => (cooldownActive.current = false), SCAN_COOLDOWN);
       router.push({
-        pathname: "/[id]",
+        pathname: "/explore/[id]",
         params: { id: codes[0].value!, isbn: "true" },
       });
     },

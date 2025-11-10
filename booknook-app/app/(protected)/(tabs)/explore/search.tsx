@@ -59,7 +59,7 @@ export default function SearchPage() {
           onSubmit={() => {
             if (searchQuery.trim()) {
               router.replace(
-                `/search?query=${encodeURIComponent(searchQuery)}`
+                `./search?query=${encodeURIComponent(searchQuery)}`
               );
             }
           }}
@@ -81,13 +81,13 @@ export default function SearchPage() {
       </View>
       <View className="flex items-center">
         <FlatList
-          className="pb-24"
           data={books}
           keyExtractor={(item) => item.id}
           numColumns={3}
           renderItem={({ item }) => <BookSummaryDisplay book={item} />}
           onEndReached={fetchBooks}
           onEndReachedThreshold={0.5}
+          contentContainerClassName="pb-12"
           showsVerticalScrollIndicator={false}
           ListFooterComponent={loading ? <ActivityIndicator /> : null}
         />

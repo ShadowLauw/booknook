@@ -19,3 +19,11 @@ export async function getBook(id: string, isbn: boolean) {
   if (!res.ok) throw new Error("Failed to fetch the book");
   return res.json();
 }
+
+export async function getBookByTitle(title: string) {
+  const res = await fetch(
+    `${apiUrl}/api/books/byTitle?q=${encodeURIComponent(title)}`
+  );
+  if (!res.ok) throw new Error("Failed to fetch the book");
+  return res.json();
+}
