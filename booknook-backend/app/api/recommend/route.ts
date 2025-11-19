@@ -15,7 +15,7 @@ export async function POST(req: Request) {
     }
 
     const prompt = `
-A user has these books in their librarx :
+A user has these books in their library :
 ${userBooks
   .map((b: any) => `- ${b.title} -- ${b.authors} -- ${b.genre}`)
   .join("\n")}

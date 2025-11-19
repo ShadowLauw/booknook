@@ -37,8 +37,6 @@ export default function RegisterPage() {
       setAuthError("");
 
       await signUp(form.email, form.password, form.username);
-
-      router.replace("/");
     } catch (err: any) {
       setAuthError(err.message || "Registration failed");
     } finally {
