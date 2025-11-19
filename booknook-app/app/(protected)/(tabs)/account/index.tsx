@@ -16,14 +16,14 @@ export default function Account() {
   };
 
   return (
-    <View className="p-2 pt-16 flex-1 items-center bg-white">
+    <View className="p-2 pt-16 flex-1 items-center">
       <View className="max-w-96 w-full items-center gap-6">
-        <View className="w-full p-4 bg-gray-100 rounded-xl">
+        <View className="w-full p-4 bg-gray-200 rounded-xl">
           <Text className="text-gray-600 font-semibold">Username</Text>
           <Text className="text-gray-800">{user?.username || "N/A"}</Text>
         </View>
 
-        <View className="w-full p-4 bg-gray-100 rounded-xl">
+        <View className="w-full p-4 bg-gray-200 rounded-xl">
           <Text className="text-gray-600 font-semibold">Email</Text>
           <Text className="text-gray-800">{user?.email || "N/A"}</Text>
         </View>

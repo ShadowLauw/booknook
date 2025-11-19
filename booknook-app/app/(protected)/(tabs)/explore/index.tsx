@@ -117,7 +117,7 @@ export default function HomePage() {
         ) : recommended.length > 0 ? (
           <BookRecommend titles={recommended.map((i) => i.title)} />
         ) : (
-          <Text className="text-gray-500">
+          <Text className="text-gray-500 p-4">
             No recommendations at the moment.
           </Text>
         )}

@@ -64,19 +64,17 @@ export default function SearchPage() {
             }
           }}
         />
-        <TouchableOpacity className="flex-row items-center gap-2 bg-white p-2 rounded-md shadow-sm">
+        <TouchableOpacity
+          onPress={() => router.push("/explore/scanner")}
+          className="flex-row items-center gap-2 bg-white p-2 rounded-md shadow-sm"
+        >
           <MaterialCommunityIcons
             className="justify-end"
             name="barcode-scan"
             size={24}
             color="black"
           />
-          <Text
-            style={{ color: "rgba(128,128,128,0.5)" }}
-            className="text-base"
-          >
-            Scan
-          </Text>
+          <Text className="text-base color-black">Scan</Text>
         </TouchableOpacity>
       </View>
       <View className="flex items-center">
